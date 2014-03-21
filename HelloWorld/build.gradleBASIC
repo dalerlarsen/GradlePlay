@@ -1,0 +1,100 @@
+task hello << {
+    println 'Hello Earth'
+}
+hello.doFirst {
+    println 'Hello Venus'
+}
+hello.doLast {
+    println 'Hello Mars'
+}
+hello << {
+    println 'Hello Jupiter'
+}
+
+
+
+
+task intro(dependsOn: hello) << {
+    println "I'm Gradle"
+}
+
+task upper << {
+    String someString = 'mY_nAmE'
+    println "Original: " + someString
+    println "Upper case: " + someString.toUpperCase()
+}
+
+task count << {
+    4.times { print "$it " }
+}
+
+task taskX(dependsOn: 'taskY') << {
+    println 'taskX'
+}
+task taskY << {
+    println 'taskY'
+}
+
+// dynamic task creation..will create task0, task1, task2, task3
+4.times { counter ->
+    task "task$counter" << {
+        println "I'm task number $counter"
+    }
+}
+
+task0.dependsOn task2, task3
+
+task myTask {
+    ext.myProperty = "myValue"
+}
+
+task printTaskProperties << {
+    println myTask.myProperty
+}
+
+task checksum << {
+    fileList('./antLoadfileResources').each {File file ->
+        ant.checksum(file: file, property: "cs_$file.name")
+        println "$file.name Checksum: ${ant.properties["cs_$file.name"]}"
+    }
+}
+
+task loadfile << {
+    fileList('./antLoadfileResources').each {File file ->
+        ant.loadfile(srcFile: file, property: file.name)
+        println "I'm fond of $file.name"
+    }
+}
+
+// Using methods to organize your build logic
+File[] fileList(String dir) {
+    file(dir).listFiles({file -> file.isFile() } as FileFilter).sort()
+}
+
+// define the default tasks
+defaultTasks 'clean', 'run'
+
+task clean << {
+    println 'Default Cleaning!'
+}
+
+task run << {
+    println 'Default Running!'
+}
+
+task distribution << {
+    println "We build the zip with version=$version"
+}
+
+task release(dependsOn: 'distribution') << {
+    println 'We release now'
+}
+
+// Different outcomes of build depending on chosen tasks
+gradle.taskGraph.whenReady {taskGraph ->
+    if (taskGraph.hasTask(release)) {
+        version = '1.0'
+    } else {
+        version = '1.0-SNAPSHOT'
+    }
+}

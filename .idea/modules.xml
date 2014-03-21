@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/GradlePlay.iml" filepath="$PROJECT_DIR$/GradlePlay.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HelloWorld/HelloWorld.iml" filepath="$PROJECT_DIR$/HelloWorld/HelloWorld.iml" />
+      <module fileurl="file://$PROJECT_DIR$/multiproject/multiproject.iml" filepath="$PROJECT_DIR$/multiproject/multiproject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/quickstart/quickstart.iml" filepath="$PROJECT_DIR$/quickstart/quickstart.iml" />
+      <module fileurl="file://$PROJECT_DIR$/quickstart-java/quickstart-java.iml" filepath="$PROJECT_DIR$/quickstart-java/quickstart-java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/quickstart-webapp/quickstart-webapp.iml" filepath="$PROJECT_DIR$/quickstart-webapp/quickstart-webapp.iml" />
+    </modules>
+  </component>
+</project>
+
